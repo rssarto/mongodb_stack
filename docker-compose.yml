@@ -1,3 +1,6 @@
+# Reference to configure the replica-set:
+# https://blog.skbali.com/2019/05/mongodb-replica-set-using-docker-compose/
+
 version: '3.0'
 services: 
     mongo_primary:
