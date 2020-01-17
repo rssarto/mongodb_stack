@@ -1,0 +1,53 @@
+version: '3.0'
+services: 
+    mongo_primary:
+        image: mongo
+        hostname: mongo_primary
+        container_name: mongo_primary
+        ports: 
+            - 30001:27017
+        networks: 
+            - mongo_cluster_network
+        volumes:
+            - ./data1/db:/data/db
+            - ./data1/configdb:/data/configdb
+        restart: always
+        entrypoint: [ "/usr/bin/mongod", "--bind_ip_all", "--replSet", "devrs" ]
+
+    mongodb_rpl_1:
+        image: mongo
+        hostname: mongodb_rpl_1
+        container_name: mongodb_rpl_1
+        ports: 
+            - 30002:27017
+        networks: 
+            - mongo_cluster_network
+        volumes:
+            - ./data2/db:/data/db
+            - ./data2/configdb:/data/configdb
+        restart: always
+        entrypoint: [ "/usr/bin/mongod", "--bind_ip_all", "--replSet", "devrs" ]
+
+    mongodb_rpl_2:
+        image: mongo
+        hostname: mongodb_rpl_2
+        container_name: mongodb_rpl_2
+        ports: 
+            - 30003:27017
+        networks: 
+            - mongo_cluster_network
+        volumes:
+            - ./data3/db:/data/db
+            - ./data3/configdb:/data/configdb
+        restart: always
+        entrypoint: [ "/usr/bin/mongod", "--bind_ip_all", "--replSet", "devrs" ]
+    
+    mongoclient:
+        image: mongoclient/mongoclient
+        ports: 
+            - 3000:3000
+        networks: 
+            - mongo_cluster_network
+            
+networks: 
+    mongo_cluster_network:
