@@ -5,10 +5,10 @@
 rs.initiate();
 
 //Adds the host mongodb_rpl_1 to the replica set.
-rs.add('mongodb_rpl_1');
+rs.add('mongodb_rpl_1:27019');
 
 //Adds the host mongodb_rpl_2 to the replica set.
-rs.add('mongodb_rpl_2');
+rs.add('mongodb_rpl_2:27020');
 
 //Shows information about synced replicas.
 rs.printSlaveReplicationInfo();
