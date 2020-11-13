@@ -3,10 +3,10 @@
 
 version: '3.1'
 services: 
-    mongo_primary:
+    mongodb_node_01:
         image: mongo
-        hostname: mongo_primary
-        container_name: mongo_primary
+        hostname: mongodb_node_01
+        container_name: mongodb_node_01
         ports: 
             - 27018:27018
         networks: 
@@ -17,10 +17,10 @@ services:
         restart: always
         entrypoint: [ "/usr/bin/mongod", "--bind_ip_all", "--replSet", "devrs", "--port", "27018" ]
 
-    mongodb_rpl_1:
+    mongodb_node_02:
         image: mongo
-        hostname: mongodb_rpl_1
-        container_name: mongodb_rpl_1
+        hostname: mongodb_node_02
+        container_name: mongodb_node_02
         ports: 
             - 27019:27019
         networks: 
@@ -31,10 +31,10 @@ services:
         restart: always
         entrypoint: [ "/usr/bin/mongod", "--bind_ip_all", "--replSet", "devrs", "--port", "27019" ]
 
-    mongodb_rpl_2:
+    mongodb_node_03:
         image: mongo
-        hostname: mongodb_rpl_2
-        container_name: mongodb_rpl_2
+        hostname: mongodb_node_03
+        container_name: mongodb_node_03
         ports: 
             - 27020:27020
         networks: 
